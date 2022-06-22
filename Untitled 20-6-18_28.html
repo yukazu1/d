@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<style id="webmakerstyle">
+ button
+  {
+       width: 100px;
+       height: 100px; 
+       border-radius: 50%;
+       border: none;
+       font-size:300%; 
+}
+.rihowhite { background:white; }
+.rihoorange { color:white;background:#ffa500; }
+.rihogray { color:white;background:gray;}  
+.rihobox { font-size: 70px;width:420px; color:white;text-align: right;background:black;border: none;}
+.rihobg { background:black; }
+.rihotext {color:white; font-size:20px}
+a {font-size:20px; color:skyblue;}
+.riholink:hover { color:#16d91c; font-size:20.5px}
+</style>
+</head>
+<body>
+
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8" /> 
+
+<body class="rihobg">
+<title >電卓</title>
+
+  <p><font class="rihotext"> 電卓 </font></p>
+<input class="rihobox" id="rihobox"><br />
+
+<button onclick="update ( '' )" class="rihowhite"  >C </button>
+<button onclick="append( '^' )"class="rihowhite">^</button>
+<button onclick="sss( '**0.5' )"class="rihowhite">√</button>
+<button onclick="mmm( '÷' )"    class="rihoorange">÷</button><br />    
+<button onclick="append( '7' )" class="rihogray">7</button>
+<button onclick="append( '8' )" class="rihogray">8</button>
+<button onclick="append( '9' )" class="rihogray">9</button>
+<button onclick="mmm( '×' )"    class="rihoorange">×</button><br />
+<button onclick="append( '4' )" class="rihogray">4</button>
+<button onclick="append( '5' )" class="rihogray">5</button>
+<button onclick="append( '6' )" class="rihogray">6</button>
+<button onclick="mmm( '-' )"    class="rihoorange">-</button><br />
+<button onclick="append( '1' )" class="rihogray">1</button>
+<button onclick="append( '2' )" class="rihogray">2</button>
+<button onclick="append( '3' )" class="rihogray">3</button>
+<button onclick="mmm( '+' )"    class="rihoorange">+</button><br />
+<button onclick="append( '0' )" class="rihogray">0</button>
+<button onclick="append( '00' )"  class="rihogray">00</button>
+<button onclick="append( '.' )" class="rihogray">.</button>
+<button onclick="calc( '' )"    class="rihoorange"> =</button><br />
+    
+<p><font class="rihotext">不具合は</font><a href="mailto:bachinkey811" target="_blank" class="riholink">@bachinkey</a></p>
+</body></html>
+
+
+<script>
+
+    function update( _v ) // input tag　を更新する関数
+    {
+      document. querySelector( 'input' ).value = _v
+    }
+    
+    
+    function append ( _v)//数字ボタンが押されたので数字を後ろに追加する
+    {
+      document. querySelector( 'input' ). value += _v
+    }
+
+    
+   function sss( _v)//ルートだから計算させるっす
+    {
+      document. querySelector( 'input' ). value += _v
+   const v = document. querySelector( 'input' ).value
+      try{
+        const f = new Function( 'return ' + v )
+        update( f().toString() )
+        } catch( _error ){}
+     
+             
+    } 
+       function mmm ( _v)//計算させるっす
+    {
+calc();
+document. querySelector( 'input' ). value += _v;
+ 
+    
+    } 
+
+    function  calc() // 「＝」が押されたので計算する
+    {
+      riri();
+        document. querySelector( 'input' ).value = 'Math.round( (' + rihobox.value + ' )  * 1000) /1000'
+      const v = document. querySelector( 'input' ).value
+      try{
+        const f = new Function( 'return ' + v )
+        update( f().toString() )
+        } catch( _error ){}
+     
+             
+    }
+
+function riri() //文字の置き換えをするっす。
+{
+var rihoch = rihobox.value;
+var result = rihoch.replace('×', '*');
+  
+ 
+//「rihoch」と「result」が同じ文字列になるまで繰り返す
+while(result !== rihoch) {
+ 
+    rihoch = rihoch.replace('×', '*');
+    result = result.replace('×', '*');
+ 
+}
+
+   var result = rihoch.replace('÷', '/');
+//「rihoch」と「result」が同じ文字列になるまで繰り返す
+while(result !== rihoch) {
+ 
+    rihoch = rihoch.replace('÷', '/');
+    result = result.replace('÷', '/');
+ 
+}  
+  var result = rihoch.replace('^', '**');
+//「rihoch」と「result」が同じ文字列になるまで繰り返す
+while(result !== rihoch) {
+ 
+    rihoch = rihoch.replace('^', '**');
+    result = result.replace('^', '**');
+ 
+}
+document. querySelector( 'input' ).value = result;
+
+}
+
+document.onkeydown = function(e) { //ショートカットキーだぜ　デュフフ
+
+  switch( e.keyCode )
+    {
+      case 49://1
+        append( '1' );
+        break;
+      case 50://2
+        append( '2' );
+        break;
+      case 51://3
+        append( '3' );
+        break;
+      case 52://4
+        append( '4' );
+        break;
+      case 53://5
+        append( '5' );       
+        break;
+      case 54://6
+        append( '6' );       
+        break;
+      case 55://7
+        append( '7' );       
+        break;
+      case 56://8
+        append( '8' );      
+        break; 
+      case 57://9
+        append( '9' );
+        break;
+      case 48://0
+        append( '0' );     
+        break;  
+      case 190://.
+        append( '.' );    
+        break;    
+      case 80://足し算
+        mmm( '+' );    
+        break;         
+      case 77://引き算
+        mmm( '-' );    
+        break;      
+      case 84://掛け算
+        mmm( '×' );    
+        break;      
+      case 68://割り算
+        mmm( '÷' );    
+        break;        
+      case 69://累乗
+        append( '^' );    
+        break;          
+      case 82://平方根
+        sss( '**0.5' );    
+        break;    
+      case 13://計算　Enter
+        calc( '' );    
+        break;           
+      case 67://クリア　Ｃ
+        update( '' );    
+        break;    
+    }
+
+}
+
+//# sourceURL=userscript.js
+</script>
+</body>
+</html>
